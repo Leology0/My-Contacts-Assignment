@@ -35,7 +35,7 @@ function goBtnHandler() {
 function displayContacts() {
   loadContacts();
   let outputStr = ''
-  for(i = 0; i < contacts.length; i++){
+  for (i = 0; i < contacts.length; i++) {
     outputStr += getContactHtmlStr(contacts[i], i);
   }
   outputEl.innerHTML = outputStr
@@ -43,13 +43,13 @@ function displayContacts() {
 }
 
 function addContact() {
-  let name = prompt ('enter contact name');
-  let email = prompt ('enter contacts email');
-  let phone = prompt ('enter contacts phone number');
-  let country = prompt ('enter contacts country');
+  let name = prompt('enter contact name');
+  let email = prompt('enter contacts email');
+  let phone = prompt('enter contacts phone number');
+  let country = prompt('enter contacts country');
   contacts.push(newContact(name, email, phone, country));
   saveContacts();
-  outputEl.innerHTML =  "contact has been added."
+  outputEl.innerHTML = "contact has been added."
 }
 
 function removeContact() {
@@ -59,23 +59,46 @@ function removeContact() {
     saveContacts();
     outputEl.innerHTML = "contact has been removed";
   } else {
-    alert ('Invalid Contact #')
+    alert('Invalid Contact #')
   }
 }
 
 function displayByName() {
-  let searchName = prompt('Enter contact name')
-  if (searchName === contact.name) {
-    
-  } 
+  loadContacts();
+  let searchName = prompt('Enter contact name');
+  let outputStr = ''
+  for (i = 0; i < contacts.length; i++) {
+    if (searchName === contacts[i].name) {
+      outputStr += getContactHtmlStr(contacts[i], i)
+    }
+  }
+  outputEl.innerHTML = outputStr
 }
 
 function displayByCountry() {
-  console.log('Display by Country');
+  loadContacts();
+  let searchCountry = prompt('Enter contact country');
+  let outputStr = ''
+  for (i = 0; i < contacts.length; i++) {
+    if (searchCountry === contacts[i].country) {
+      outputStr += getContactHtmlStr(contacts[i], i)
+    }
+  }
+  outputEl.innerHTML = outputStr
 }
 
-function findByEmail() {
-  console.log ('Display by Email')
+function findByEmail(searchEmail) {
+  loadContacts();
+  searchEmail = prompt('Enter contact email')
+  let outputStr = ''
+  for (i = 0; i < contacts.length; i++) {
+    if (searchEmail === contacts[i].email) {
+      outputStr += getContactHtmlStr(contacts[i], i)
+    // } else if (searchEmail !== contacts[i].email) {
+      
+    }
+  }
+  outputEl.innerHTML = outputStr
 }
 
 // Return contact object
